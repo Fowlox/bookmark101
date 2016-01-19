@@ -1,0 +1,32 @@
+<html>
+<!-- Min VS original -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>  
+
+<!-- Angular -->
+<script>  
+var app = angular.module("Bookmark", []);  
+app.controller("Ctrl", function ($scope) {
+	$scope.url;  
+    $scope.urlArr=[];  
+
+    $scope.add = function() {
+    	$scope.urlArr.push($scope.url)
+    }
+});  
+</script>
+
+<body ng-app="Bookmark" ng-controller="Ctrl">
+<h1>Hi! {{urlArr.length}}</h1>
+<ol>
+  <li> http://www.hani.co.kr 
+  <li> http://www.google.com
+  <li> {{url}}
+</ol>
+<form>
+<input ng-model="url">
+<input type="submit" ng-click="add();">
+</form>
+  
+
+</body>
+</html>

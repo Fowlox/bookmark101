@@ -1,0 +1,49 @@
+<html>
+<!-- Min VS original -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>  
+<script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+<!-- Angular -->
+<script>  
+var app = angular.module("Bookmark", ['firebase']);  
+app.controller("Ctrl", function ($scope, $firebaseArray) {
+	$scope.url;  
+
+    var firebaseURL = "https://sbookmark.firebaseio.com/";
+
+    $scope.getList = function() {
+    	var echoRef = new Firebase(firebaseURL);
+  		var query = echoRef.orderByChild("url");
+  		$scope.urlArr = $firebaseArray(query);
+    };
+
+    $scope.add = function() { 
+  		$scope.urlArr.$add({
+    		url: $scope.url,
+    		title: "TBA"
+  		});   
+    };
+
+    $scope.remove = function (url) {
+      $scope.urlArr.$remove(url);
+    };
+
+    // load the list!
+    $scope.getList();
+});  
+</script>
+
+<body ng-app="Bookmark" ng-controller="Ctrl">
+<h1>Hi! {{urlArr.length}}</h1>
+<ol ng-repeat="u in urlArr">
+  <li> {{u.url}} {{u.title}} <A href="#" ng-click="remove(u);">[X]</A><a>
+</ol>
+<form>
+<input ng-model="url">
+<input type="submit" ng-click="add();">
+</form>
+  
+
+</body>
+</html>

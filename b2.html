@@ -1,0 +1,27 @@
+<html>
+<!-- Min VS original -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>  
+
+<!-- Angular -->
+<script>  
+var app = angular.module("Bookmark", []);  
+app.controller("Ctrl", function ($scope) {  
+    $scope.message = "Welcome User";  
+});  
+</script>
+
+<body ng-app="mainApp" ng-controller="Ctrl">
+<h1>Hi! {{message}}</h1>
+<ol>
+  <li> http://www.hani.co.kr 
+  <li> http://www.google.com
+  <li> {{url}}
+</ol>
+<form>
+<input ng-model="url">
+<input type="submit">
+</form>
+  
+
+</body>
+</html>
